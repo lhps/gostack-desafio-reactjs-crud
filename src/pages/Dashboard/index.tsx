@@ -31,7 +31,6 @@ const Dashboard: React.FC = () => {
       const foodsFromApi = await api.get<IFoodPlate[]>('foods');
 
       const foodsParsed = foodsFromApi.data;
-      console.log(foodsParsed);
 
       setFoods(foodsParsed);
     }
@@ -65,20 +64,13 @@ const Dashboard: React.FC = () => {
 
     // const editedFood = foods.find(foodFind => foodFind.id === editingFood.id);
     const findIndexOfFood = foods.findIndex(item => item.id === editingFood.id);
-    console.log('findIndexOfFood', findIndexOfFood);
 
     const updatedFoods = [...foods];
-    console.log('updatedFoods', updatedFoods);
 
     updatedFoods[findIndexOfFood] = foodParsed;
-    console.log('foodParsed', foodParsed);
-    // delete foodParsed.id;
 
     setFoods(updatedFoods);
     await api.put(`foods/${foodParsed.id}`, foodParsed);
-    // const updatedFood = await api.post('foods', {
-    //   ...parsedFood,
-    // });
   }
 
   async function handleDeleteFood(id: number): Promise<void> {
